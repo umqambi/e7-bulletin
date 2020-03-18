@@ -1,0 +1,38 @@
+{% import "_forms.html" as forms %}
+{% extends "base.html" %}
+
+{% block page_header %}
+  <div class="page-header">
+    <h1>{{ advert.title }}</h1>
+    {% if advert.tags %}
+      {% for tag in advert.tags %}
+        <span class="badge badge-secondary">{{ tag }}</span>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <p>{{ advert.body }}<p>
+  <p>{{ advert.created_at.strftime('%H:%M %d-%m-%Y') }}</p>
+  <hr>
+  <h2>Отклики:</h2>
+  {% if advert.comments %}
+    {% for comment in advert.comments %}
+       <p>{{ comment.body }}</p>
+       <p><strong>{{ comment.author }}</strong> <small>в {{ comment.created_at.strftime('%H:%M %d-%m-%Y') }}</small></p>
+      {{ comment.text }}
+    {% endfor %}
+  {% endif %}
+
+<hr>
+<h2>Добавить комментарий</h2>
+<form action="." method="post">
+  {{ forms.render(form) }}
+<hr>
+  <div class="actions">
+    <input type="submit" class="btn primary" value="Комментировать">
+  </div>
+</form>
+<hr>
+{% endblock %}

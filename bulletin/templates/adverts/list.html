@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for ad in adverts %}
+      <h2><a href="{{ url_for('adverts.detail', slug=ad.slug) }}">{{ ad.title }}</a></h2>
+      <p>{{ ad.body|truncate(100) }}</p>
+      <p>
+        {{ ad.created_at.strftime('%H:%M %d-%m-%Y') }} |
+        {% with total=ad.comments|length %}
+            {{ total }} Ответ {%- if total %10 in (2,3,4) %}а{%- elif total %10 in (5,6,7,8,9,0) -%}ов{%- else -%}{%- endif -%}
+        {% endwith %}
+      </p>
+    {% endfor %}
+{% endblock %}
