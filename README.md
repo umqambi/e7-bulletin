@@ -13,6 +13,12 @@
     ```
     cd e7-bulletin
     ```
+ - Создаем виртуальное окружение и устанавливаем зависимости
+    ```
+    virtualenv -p /usr/bin/python3.8 venv
+    pip install -r requirements.txt
+
+    ```
  - Запускаем скрипт запуска проекта
     ```
     sh boot_direct.sh
